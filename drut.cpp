@@ -218,6 +218,38 @@ void deleteDups(Node* head){
 }
 
 
+void deleteNode(Node* & head, int num){
+    // we need to delete the node that carries num.
+
+    if(!head){
+        return;
+    }
+
+
+    Node* curr = head->next;
+    Node* prev = head;
+
+
+    while(curr){
+        if(curr->data == num){
+            prev->next = curr->next; // we attached with 0-2 to eliminate 1.
+            delete curr;
+            return;
+        }
+        curr = curr->next;
+        prev = prev->next;
+    }
+
+    if(!curr){
+        cout<<"There is no node to be deleted."<<endl;
+        return;
+    }
+
+
+
+    
+}
+
 
 
 // ─────────────────────────────────────────────
