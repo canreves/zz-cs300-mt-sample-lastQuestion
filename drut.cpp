@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // ─────────────────────────────────────────────
@@ -173,6 +174,51 @@ public:
         cout << "\n";
     }
 };
+
+
+void deleteDups(Node* head){
+
+    if(!head || !head->next){
+        return;
+    }
+
+    vector<int> dummies;
+    Node* prev = head;
+    Node* curr = head->next;
+    Node* temp;
+    dummies.push_back(head->data);
+
+    while(curr){
+        // first we need to push the value to the vector.
+        dummies.push_back(curr->data);
+        bool isDuplicated = false;
+        int count = 0;
+        // now we need to check if the value is duplicated or not
+        for(int i = 0; i<dummies.size(); i++){
+            if(dummies[i] == curr->data){
+                count++;
+                    if(count > 1){
+                        isDuplicated = true;
+                        break;
+                    }
+            }
+        }
+        // now we need to deal with the duplication.
+        if(isDuplicated){
+            temp = curr;
+            curr = curr->next;
+            prev->next = curr;
+            delete temp;
+        }
+        else{
+            curr = curr->next;
+            prev = prev->next;
+        }
+    }
+}
+
+
+
 
 // ─────────────────────────────────────────────
 //  Demo
